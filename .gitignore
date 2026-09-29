@@ -1,0 +1,16 @@
+# Secrets
+.env
+
+# Downloaded data (re-downloadable)
+data/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Editors
+.vscode/
+.idea/
