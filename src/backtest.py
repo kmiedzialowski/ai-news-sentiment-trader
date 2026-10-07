@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import os
 
-def plot_results(results, title, filename="results/equity_curve.png"):
+def plot_results(results: pd.DataFrame, title: str, filename: str = "results/equity_curve.png") -> None:
     """Plot every strategy column vs. buy-and-hold and save as a PNG."""
     fig, ax = plt.subplots(figsize=(10, 5))
 
@@ -20,7 +20,7 @@ def plot_results(results, title, filename="results/equity_curve.png"):
     fig.savefig(filename, dpi=150)
     plt.close(fig)
     print(f"Chart saved to {filename}")
-def run_backtest(df, signal, initial_cash=10000):
+def run_backtest(df: pd.DataFrame, signal: pd.Series, initial_cash: float = 10000) -> pd.DataFrame:
     # Percent change perday
     daily_return = df["Close"].pct_change().fillna(0)
 
@@ -37,7 +37,7 @@ def run_backtest(df, signal, initial_cash=10000):
     return results
 
 
-def summarize(equity):
+def summarize(equity: pd.Series) -> dict[str, str]:
     total_return = equity.iloc[-1]/ equity.iloc[0] - 1
     running_peak = equity.cummax()
     drawdown = equity / running_peak - 1

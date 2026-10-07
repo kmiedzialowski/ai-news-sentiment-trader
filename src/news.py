@@ -3,7 +3,7 @@ import pandas as pd
 NEWS_FILE = "data/news/raw_analyst_ratings.csv"
 
 
-def load_headlines(ticker, trading_days):
+def load_headlines(ticker: str, trading_days: pd.DatetimeIndex) -> pd.DataFrame:
 
     news = pd.read_csv(NEWS_FILE, usecols=["headline", "date", "stock"])
     news = news[news["stock"] == ticker].copy()

@@ -5,7 +5,7 @@ import yfinance as yf
 DATA_DIR = "data"
 
 
-def loadprices(ticker, start, end):
+def loadprices(ticker: str, start: str, end: str) -> pd.DataFrame:
     """Load daily prices for a ticker (cached in data/), trimmed to [start, end]."""
     path = os.path.join(DATA_DIR, f"{ticker}.csv")
 

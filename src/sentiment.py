@@ -11,14 +11,14 @@ _classifier = pipeline(
 )
 
 
-def score_headline(text):
+def score_headline(text: str) -> float:
 
     results = _classifier(text[:512])[0]
     probs = {r["label"]: r["score"] for r in results}
     return probs["positive"] - probs["negative"]
 
 
-def score_headlines(texts, batch_size=32):
+def score_headlines(texts: list[str] | pd.Series, batch_size: int = 32) -> list[float]:
     results = _classifier(list(texts), batch_size=batch_size, truncation=True)
     scores = []
     for r in results:
@@ -26,7 +26,7 @@ def score_headlines(texts, batch_size=32):
         scores.append(probs["positive"] - probs["negative"])
     return scores
 
-def daily_sentiment(ticker, news):
+def daily_sentiment(ticker: str, news: pd.DataFrame) -> pd.DataFrame:
     path = os.path.join("data", f"sentiment_{ticker}.csv")
 
     if os.path.exists(path):
